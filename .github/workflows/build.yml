@@ -7,7 +7,6 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -21,11 +20,11 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Build EXE
-        run: pyinstaller --onefile --noconsole --name="Заявки PKI" "Заявка на криптосредства (7).py"
+        run: pyinstaller --onefile --noconsole --name="ZayavkiPKI" pki_zayavka.py
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Заявки-PKI-Windows
-          path: dist/Заявки PKI.exe
+          name: ZayavkiPKI-Windows
+          path: dist/ZayavkiPKI.exe
           retention-days: 30
