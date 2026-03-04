@@ -1,0 +1,31 @@
+name: Build Windows EXE
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build EXE
+        run: pyinstaller --onefile --noconsole --name="Заявки PKI" "Заявка на криптосредства (7).py"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Заявки-PKI-Windows
+          path: dist/Заявки PKI.exe
+          retention-days: 30
